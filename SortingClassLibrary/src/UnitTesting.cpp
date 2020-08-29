@@ -61,6 +61,22 @@ int Test_SelectionSort(void) {
 		std::cout << "  Test 1 (Char Test): FAILED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
 	}
 
+
+	// Test 4: Identical Items
+	sortArray = { 1, 3, 5, 7, 10, 1, 20, 2, 3, 1 }, ans = { 1, 1, 1, 2, 3, 3, 5, 7, 10, 20 };
+	start = Clock::now();
+	SelectionSort(sortArray);
+	finish = Clock::now();
+
+	// Now verify equality and print out the results
+	if (Verify(sortArray, ans)) {
+		std::cout << "  Test 1 (Simple Test): PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+	}
+	else {
+		result = 0;
+		std::cout << "  Test 1 (Char Test): FAILED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+	}
+
 	return result;
 }
 
