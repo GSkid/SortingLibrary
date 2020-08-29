@@ -7,6 +7,8 @@
 int Test_SelectionSort(void);
 
 
+int Verify(std::vector<int>&, std::vector<int>&);
+
 
 #endif // !SORT_TESTING
 

@@ -1,9 +1,10 @@
 #include "UnitTesting.h"
 #include <vector>
 #include <iostream>
+#include <chrono>
 
 
-
+typedef std::chrono::high_resolution_clock Clock;
 
 int Test_SelectionSort(void) {
 	int result = 1;
@@ -15,20 +16,33 @@ int Test_SelectionSort(void) {
 	std::vector<int> sortArray = { 1, 0, 2, 3, 7, 5, 4, 6, 9, 8 }, ans = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	
 	// Now call Selection Sort on sortArray
+	auto start = Clock::now();
 	SelectionSort(sortArray);
+	auto finish = Clock::now();
 
-	// Now check for equality
-	for (unsigned int index = 0; index < sortArray.size(); index++) {
-		if (sortArray[index] != ans[index]) {
-			std::cout << "  Test 1 (Simple Test): FAILED" << std::endl;
-			result = 0;
-			break;
-		}
-		// Now print out a passing status message
-		if (index == (sortArray.size() - 1)) {
-			std::cout << "  Test 1 (Simple Test): PASSED" << std::endl;
-		}
+	// Now verify equality
+	if (Verify(sortArray, ans)) {
+		std::cout << "  Test 1 (Simple Test): PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
 	}
+	else {
+		result = 0;
+		std::cout << "  Test 1 (Simple Test): FAILED" << std::endl;
+	}
+
+	sortArray = { 'A', 'M', 'D', 'L', 'C', 'F', 'Z', 'I', 'H' }, ans = { 'A', 'C', 'D', 'F', 'H', 'I', 'L', 'M', 'Z' };
+	start = Clock::now();
+	SelectionSort(sortArray);
+	finish = Clock::now();
+
+	// Now verify equality
+	if (Verify(sortArray, ans)) {
+		std::cout << "  Test 1 (Simple Test): PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+	}
+	else {
+		result = 0;
+		std::cout << "  Test 1 (Char Test): FAILED" << std::endl;
+	}
+
 	return result;
 }
 
@@ -40,4 +54,15 @@ int main() {
 
 	std::cin.get();
 	return(1);
+}
+
+
+// #### HELPER FUNCTIONS ####
+int Verify(std::vector<int>& sortArray, std::vector<int>& ans) {
+	for (unsigned int index = 0; index < sortArray.size(); index++) {
+		if (sortArray[index] != ans[index]) {
+			return 0;
+		}
+	}
+	return 1;
 }
