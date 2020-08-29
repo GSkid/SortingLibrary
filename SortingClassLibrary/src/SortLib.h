@@ -4,7 +4,7 @@
 #include <vector>
 #include <array>
 
-void SelectionSort(std::vector<int>&);
+void SelectionSort(std::vector<double>&);
 
 
 #endif // !SORT_CLASS

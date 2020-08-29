@@ -13,7 +13,7 @@ int Test_SelectionSort(void) {
 
 
 	// Test 1: Simple test 0-9
-	std::vector<int> sortArray = { 1, 0, 2, 3, 7, 5, 4, 6, 9, 8 }, ans = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+	std::vector<double> sortArray = { 1, 0, 2, 3, 7, 5, 4, 6, 9, 8 }, ans = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	
 	// Now call Selection Sort on sortArray, recording the time the process takes
 	auto start = Clock::now();
@@ -22,11 +22,11 @@ int Test_SelectionSort(void) {
 
 	// Now verify equality and print out the results
 	if (Verify(sortArray, ans)) {
-		std::cout << "  Test 1 (Simple Test): PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+		std::cout << "  Test 1 (Simple Test):    PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
 	}
 	else {
 		result = 0;
-		std::cout << "  Test 1 (Simple Test): FAILED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+		std::cout << "  Test 1 (Simple Test):    FAILED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
 	}
 
 
@@ -38,11 +38,11 @@ int Test_SelectionSort(void) {
 
 	// Now verify equality and print out the results
 	if (Verify(sortArray, ans)) {
-		std::cout << "  Test 1 (Simple Test): PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+		std::cout << "  Test 2 (Char Test):      PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
 	}
 	else {
 		result = 0;
-		std::cout << "  Test 1 (Char Test): FAILED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+		std::cout << "  Test 2 (Char Test):      FAILED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
 	}
 
 
@@ -54,15 +54,15 @@ int Test_SelectionSort(void) {
 
 	// Now verify equality and print out the results
 	if (!Verify(sortArray, ans)) {
-		std::cout << "  Test 1 (Simple Test): PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+		std::cout << "  Test 3 (Unequal Test):   PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
 	}
 	else {
 		result = 0;
-		std::cout << "  Test 1 (Char Test): FAILED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+		std::cout << "  Test 3 (Unequal Test):   FAILED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
 	}
 
 
-	// Test 4: Identical Items
+	// Test 4: Multiples of Items
 	sortArray = { 1, 3, 5, 7, 10, 1, 20, 2, 3, 1 }, ans = { 1, 1, 1, 2, 3, 3, 5, 7, 10, 20 };
 	start = Clock::now();
 	SelectionSort(sortArray);
@@ -70,11 +70,41 @@ int Test_SelectionSort(void) {
 
 	// Now verify equality and print out the results
 	if (Verify(sortArray, ans)) {
-		std::cout << "  Test 1 (Simple Test): PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+		std::cout << "  Test 4 (Multiples Test): PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
 	}
 	else {
 		result = 0;
-		std::cout << "  Test 1 (Char Test): FAILED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+		std::cout << "  Test 4 (Multiples Test): FAILED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+	}
+
+	// Test 5: Floats
+	sortArray = { 0.5, 10.1, 3.14, 1.5, 0.2, 1, 3 }, ans = { 0.2, 0.5, 1, 1.5, 3, 3.14, 10.1 };
+	start = Clock::now();
+	SelectionSort(sortArray);
+	finish = Clock::now();
+
+	// Now verify equality and print out the results
+	if (Verify(sortArray, ans)) {
+		std::cout << "  Test 5 (Floats Test):    PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+	}
+	else {
+		result = 0;
+		std::cout << "  Test 5 (Floats Test):    FAILED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+	}
+
+	// Test 5: Negative Numbers
+	sortArray = { -1, 100, 1, 0, 1.5, -3, -300 }, ans = { -300, -3, -1, 0, 1, 1.5, 100 };
+	start = Clock::now();
+	SelectionSort(sortArray);
+	finish = Clock::now();
+
+	// Now verify equality and print out the results
+	if (Verify(sortArray, ans)) {
+		std::cout << "  Test 6 (Negatives Test): PASSED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
+	}
+	else {
+		result = 0;
+		std::cout << "  Test 6 (Negatives Test): FAILED  (" << std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count() << "us)" << std::endl;
 	}
 
 	return result;
@@ -92,7 +122,7 @@ int main() {
 
 
 // #### HELPER FUNCTIONS ####
-int Verify(std::vector<int>& sortArray, std::vector<int>& ans) {
+int Verify(const std::vector<double>& sortArray, const std::vector<double>& ans) {
 	for (unsigned int index = 0; index < sortArray.size(); index++) {
 		if (sortArray[index] != ans[index]) {
 			return 0;
